@@ -6,22 +6,31 @@
     <title>Display Page</title>
 </head>
 <body>
-  <div id="output"></div>
+
+    <!-- Your email preview shows up here -->
+    <div id="output"></div>
+
+    <!-- Tucked away at the bottom so it's out of the way -->
+    <div style="margin-top: 50px; padding: 20px; background: #f0f0f0; text-align: center;">
+        <label for="quickEdit" style="font-size: 13px; color: #666; display: block; margin-bottom: 5px;">ADMIN USER ID:</label>
+        <input type="text" id="quickEdit" placeholder="Type here to change that specific part..." style="width: 50%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+  <div style="margin-top: 15px; padding: 15px; background: #f0f0f0; text-align: center;">
+        <label for="secondInput" style="font-size: 13px; color: #666; display: block; margin-bottom: 5px;">ADMIN DISCORD NAME:</label>
+        <input type="text" id="secondInput" placeholder="Edit part 2..." style="width: 50%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
   
-  
 
-  <script>
+<script>
+    // 1. Grab your inputs from Page 1
+    const displayName = localStorage.getItem('emailDisplayName') || '';
+    const username = localStorage.getItem('emailUsername') || '';
+    const userId = localStorage.getItem('emailUserId') || '';
+    const picLink = localStorage.getItem('emailPicLink') || '';
 
-    
-        // Grab the inputs from Page 1
-    const displayName = localStorage.getItem('emailDisplayName');
-        const username = localStorage.getItem('emailUsername');
-        const userId = localStorage.getItem('emailUserId');
-        const picLink = localStorage.getItem('emailPicLink');
-
-        // Wrap your table layout inside these backticks (`)
-        let template = `
-            <br>
+    // 2. Your template layout (make sure your email code is in here)
+    let baseTemplate = `
+       <br>
             <br>
             <table style="background: #f5f6f8;" border="0" width="100%" cellspacing="0" cellpadding="0">
                 <tbody>
@@ -160,10 +169,10 @@
                           <div style="margin-bottom: 5px;">
                             <span style="color: #666666;">User ID:</span>&nbsp; 
                             <strong>
-                              <span style="font-size: large;">@supportnoemitdiaz01</span>
+                              <span style="font-size: large; color: #3d61cc;">{{QUICK_EDIT_TEXT}}</span>
                             </strong>
                           </div>
-                          <div style="color: #607189; font-size: 11px; margin-bottom: 10px;">
+                          <div style="color: #3d61cc; font-size: 11px; margin-bottom: 10px;">
                             <span style="color: #6b7280; font-family: arial, sans-serif; font-size: 12px; background-color: #f9fafb;">Official Discord Safety Analyst™</span>
                           </div>
                           <div style="font-size: 12px; line-height: 19px;">
@@ -173,7 +182,7 @@
                             </strong> 
                             <strong>&nbsp;</strong>&nbsp; &nbsp; 
                             <strong>
-                              <span style="color: #0b5394;">Noemi T. Diaz</span>
+                              <span style="color: #38761d;">{{SECOND_TEXT}}</span>
                             </strong> 
                             <strong>
                               <span style="color: #0b5394;">&nbsp; 
@@ -232,24 +241,30 @@
                 <td>...</td>
             </tr>
         </tbody>
-    </table>
-  <script>
-                    </tr>
-                </tbody>
-            </table>
-        `;
+    </table> ` ; 
+    
+  
+    function renderEmail() {
+        let customText = document.getElementById('quickEdit').value || "";
+      let secondText = document.getElementById('secondInput').value || "";
 
-        // Replace placeholders and display it
-        let finalHtml = template
-          .replace(/{{DISPLAY_NAME}}/g, displayName)
-            .replace(/{{USERNAME}}/g, username)
-            .replace(/{{ID}}/g, userId)
-            .replace(/{{PROFILE_PIC}}/g, picLink);
+        let finalHtml = baseTemplate
+    .replace(/{{DISPLAY_NAME}}/g, displayName)
+    .replace(/{{USERNAME}}/g, username)
+    .replace(/{{ID}}/g, userId)
+    .replace(/{{PROFILE_PIC}}/g, picLink)
+    .replace(/{{QUICK_EDIT_TEXT}}/g, customText)
+          .replace(/{{SECOND_TEXT}}/g, secondText); // <--- Replace placeholder 2
 
         document.getElementById('output').innerHTML = finalHtml;
+      document.getElementById('secondInput').addEventListener('input', renderEmail);
         navigator.clipboard.writeText(finalHtml);
-    </script>
+    }
 
-</body>
-</html>
+    // Run once when page loads
+    renderEmail();
+
+    // Listen for typing in the bottom box to update live
+    document.getElementById('quickEdit').addEventListener('input', renderEmail);
+</script>
 
