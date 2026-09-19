@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Display Page</title>
+</head>
+<body>
+  <div id="output"></div>
+  
+  
+
+  <script>
+
+    
+        // Grab the inputs from Page 1
+    const displayName = localStorage.getItem('emailDisplayName');
+        const username = localStorage.getItem('emailUsername');
+        const userId = localStorage.getItem('emailUserId');
+        const picLink = localStorage.getItem('emailPicLink');
+
+        // Wrap your table layout inside these backticks (`)
+        let template = `
+            <br>
+            <br>
+            <table style="background: #f5f6f8;" border="0" width="100%" cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr>
+                        <br>
+<table style="background: #f5f6f8;" border="0" width="100%" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="center">
+        <br>
+        <br>
+        <img style="margin-right: 0px;" src="https://share1.cloudhq-mkt3.net/4f9c2ae99e46c5.png" alt="" width="175" height="48"> 
+        <br>
+        <span style="font-size: 8pt;">
+          <strong>Service Notification</strong>
+        </span>
+        <table style="width: 600px; max-width: 100%; margin-top: 18px; background: #ffffff; border: 1px solid #e0e3e7; border-radius: 11px; overflow: hidden; height: 704px;" border="0" width="600" cellspacing="0" cellpadding="0">
+          <tbody>
+            <tr style="height: 59px;">
+              <td style="background: #fff0f0; border-bottom: 1px solid #ffd6d6; padding: 13px 16px 14px; height: 59px; width: 566.222px;">
+                <div style="font-size: 13px; font-weight: bold; margin-bottom: 7px;">
+                  <strong style="color: #990000;">
+                    <span style="font-family: tahoma, sans-serif;">PENDING REPORT — Fraudulent</span>
+                  </strong>
+                </div>
+                <div style="font-size: 11.5px; line-height: 18px;">
+                  <span style="color: #666666; font-size: x-small;">An active enforcement case is associated with this account, and compliance verification is currently pending.&nbsp;Inform reported User and advise them to submit an appeal. Due to the report category selected, they will not receive an automatic notification.</span>
+                </div>
+              </td>
+            </tr>
+            <tr style="height: 609px;">
+              <td style="padding: 16px; height: 609px; width: 566.222px;">
+                <input name="cloudhq_backup_comment_node" type="hidden" value="%20ACCOUNT%20DETAILS%20CARD%20">
+                <table style="background: #f8f9fa; border: 1px solid #dfe3e7; border-radius: 9px;" border="0" width="100%" cellspacing="0" cellpadding="0">
+                  <tbody>
+                    <tr>
+                      <td style="padding: 14px;">​ ​
+                        <table style="width: 100%; height: 113px;" border="0" width="100%" cellspacing="0" cellpadding="0">
+                          <tbody>
+                            <tr style="height: 113px;">
+                              <td style="width: 58.2868%; height: 113px;" valign="top">
+                                <div style="color: #617087; font-size: 11px; font-weight: bold; letter-spacing: .6px; margin-bottom: 9px;">ACCOUNT DETAILS</div>
+                                <div style="color: #071b30; margin-bottom: 9px;">
+    <strong>
+        <span style="font-size: large;">{{DISPLAY_NAME}}</span>
+    </strong>
+</div>
+<div style="font-size: 12px; line-height: 20px;">
+    <strong style="color: #0b2948;">Username:</strong>&nbsp; 
+    <strong>
+        <span style="color: #38761d;">&nbsp; &nbsp;&nbsp; 
+            <span style="font-size: small;">{{USERNAME}}</span>
+        </span>
+    </strong>
+</div>
+<div style="font-size: 12px; line-height: 20px;">
+    <strong style="color: #0b2948;">User ID:&nbsp;</strong>&nbsp; &nbsp; &nbsp; &nbsp; 
+    <span style="color: #38761d;">&nbsp; 
+        <span style="font-size: small;">
+            <strong>{{ID}}</strong>
+        </span>
+    </span>
+</div>
+<div style="color: #5b6d83; font-size: 12px; line-height: 20px; margin-top: 3px;">
+    <strong>
+        <span style="color: #800000;">Status:</span>
+    </strong> 
+    <span style="color: #808080; font-family: arial, sans-serif; font-size: 13px; background-color: #f9fafb;">    Pending Compliance Verification.</span>
+</div>
+                              </td>
+                              <td style="width: 41.7132%; height: 113px;" align="right" valign="top">
+                                <span style="display: inline-block; background: #fff1f1; color: #b42323; border: 1px solid #ffcccc; border-radius: 0px; padding: 5px 13px; font-size: 10px; white-space: nowrap;">
+                                  <img style="margin-right: 0px;" src="{{PROFILE_PIC}} alt="image.png" width="81" height="81" data-surl="cid:ii_mtyl3r2c0">​ 
+                                  <br>
+                                  <span style="font-family: verdana, sans-serif;">
+                                    <strong>ALLEGED USER</strong>
+                                  </span>
+                                </span>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <input name="cloudhq_backup_comment_node" type="hidden" value="%20SECTION%20TITLE%20">
+                <div style="color: #071b30; font-size: 14px; font-weight: bold; margin-top: 18px; margin-bottom: 6px;">The user involved must</div>
+                <div style="color: #36516e; font-size: 11.5px; line-height: 18px; margin-bottom: 7px;">The enforcement window will close in approximately&nbsp; 
+                  <strong>24 hours</strong>.
+                </div>
+                <input name="cloudhq_backup_comment_node" type="hidden" value="%20NUMBERED%20STEPS%20">
+                <table style="font-size: 11.5px; color: #173b60; line-height: 18px;" border="0" width="100%" cellspacing="0" cellpadding="0">
+                  <tbody>
+                    <tr>
+                      <td style="padding: 2px 7px 3px 0;" valign="top">1.</td>
+                      <td style="padding: 2px 0 3px 0;">Add the assigned Discord Support through the provided tag to proceed with the verification process.</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 2px 7px 3px 0;" valign="top">2.</td>
+                      <td style="padding: 2px 0 3px 0;">Once you have sent the friend request to support, please send a message and provide the relevant case details.</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 2px 7px 3px 0;" valign="top">3.</td>
+                      <td style="padding: 2px 0 3px 0;">Contact official support and complete the required verification before the enforcement window ends to avoid further action.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table style="margin-top: 16px; background: #fff1f1; border: 1px solid #ffcccc; border-radius: 8px;" border="0" width="100%" cellspacing="0" cellpadding="0">
+                  <tbody>
+                    <tr>
+                      <td style="padding: 12px 13px;">
+                        <div style="font-size: 13px; font-weight: bold; margin-bottom: 7px;">
+                          <strong>
+                            <span style="font-family: arial, sans-serif; background-color: #fff1f2;">
+                              <span style="color: #990000;">Action Required — Discord Contact Missing</span>
+                            </span>
+                          </strong>
+                        </div>
+                        <div style="font-size: 11px; line-height: 17px;">
+                          <span style="color: #666666;">Validation cannot proceed until the assigned Discord Support has been added. Failure to establish contact may result in escalation and automatic enforcement.</span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <input name="cloudhq_backup_comment_node" type="hidden" value="%20ASSIGNED%20CONTACT%20CARD%20">
+                <table style="margin-top: 17px; background: #f8f9fa; border: 1px solid #dfe3e7; border-radius: 9px;" border="0" width="100%" cellspacing="0" cellpadding="0">
+                  <tbody>
+                    <tr>
+                      <td style="padding: 14px;">
+                        <div style="color: #617087; font-size: 11px; letter-spacing: 0.6px; margin-bottom: 9px;">
+                          <span style="font-family: tahoma, sans-serif;">ASSIGNED CONTACT SUPPORT INFO</span>
+                        </div>
+                        <div style="margin-bottom: 5px;">
+                          <div style="margin-bottom: 5px;">
+                            <span style="color: #666666;">User ID:</span>&nbsp; 
+                            <strong>
+                              <span style="font-size: large;">@supportnoemitdiaz01</span>
+                            </strong>
+                          </div>
+                          <div style="color: #607189; font-size: 11px; margin-bottom: 10px;">
+                            <span style="color: #6b7280; font-family: arial, sans-serif; font-size: 12px; background-color: #f9fafb;">Official Discord Safety Analyst™</span>
+                          </div>
+                          <div style="font-size: 12px; line-height: 19px;">
+                            <strong style="color: #173b60;">
+                              <span style="font-size: 13px; color: #374151; background-color: #f9fafb; font-family: arial, sans-serif;">Discord Name</span>&nbsp; 
+                              <span style="color: #222222; font-size: small;">&nbsp;</span>:&nbsp;
+                            </strong> 
+                            <strong>&nbsp;</strong>&nbsp; &nbsp; 
+                            <strong>
+                              <span style="color: #0b5394;">Noemi T. Diaz</span>
+                            </strong> 
+                            <strong>
+                              <span style="color: #0b5394;">&nbsp; 
+                                <span style="font-size: small;">&nbsp;</span>
+                              </span>
+                            </strong>
+                          </div>
+                        </div>
+                        <input name="cloudhq_backup_comment_node" type="hidden" value="%20BLUE%20BUTTON%20"> 
+                        <span style="font-size: 8pt;">
+                          <a href="https://discord.com/channels/@me/1456297213033447661" target="_blank" class="cloudHQ__gmail_elements_final_btn" style="background-color: #3d61cc; color: #ffffff; border: 0px solid #000000; border-radius: 3px; box-sizing: border-box; font-weight: bold; line-height: 40px; padding: 12px 24px; text-align: center; text-decoration: none; text-transform: uppercase; vertical-align: middle;" rel="noopener">Contact Support</a>
+                        </span> 
+                        <br>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr style="height: 36px;">
+              <td style="border-top: 1px solid #e0e3e7; padding: 17px 18px 15px; height: 36px; width: 562.222px;">
+                <div style="color: #63758a; font-size: 9.5px; line-height: 15px; margin-bottom: 10px; text-align: center;">
+                  <strong style="color: #666666; font-family: Arial, sans-serif; font-size: 10.6667px; text-align: center;">Account Safety &amp; Review Department&nbsp;</strong>
+                </div>
+                <div style="line-height: 15px; margin-bottom: 10px; text-align: center;">
+                  <span style="color: #6b7280; font-size: 11px; font-family: arial, sans-serif;">Failure to submit valid proof may result in full suspension within 24 hours of this ticket being filed. This action may proceed automatically if no response is received.</span> 
+                  <span style="color: #63758a; font-size: xx-small;">More information:</span> 
+                  <a href="https://support.discord.com/hc/en-us/articles/4420312247575-Additional-Terms-and-Policies" style="color: #4c5ff1; font-size: 9.5px; text-decoration: none; font-weight: bold;">Terms of Service</a> 
+                  <span style="color: #63758a; font-size: xx-small;">·</span> 
+                  <a href="https://support.discord.com/hc/en-us/articles/4420312247575-Additional-Terms-and-Policies" style="color: #4c5ff1; font-size: 9.5px; text-decoration: none; font-weight: bold;">Privacy Policy</a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <span style="color: #666666; font-family: Arial, sans-serif; background-color: #f1f2f3; font-size: 8pt;">Sent by Discord • Check Our Blog •&nbsp; 
+          <a href="https://discord.com/" target="_blank" style="color: #5865f2; text-decoration: none;" rel="noopener">@discord</a>
+        </span> 
+        <br style="color: #666666; font-family: Arial, sans-serif; font-size: 11px; background-color: #f1f2f3;">
+        <span style="color: #666666; font-family: Arial, sans-serif; background-color: #f1f2f3; font-size: 8pt;">444 De Haro Street, Suite 200, San Francisco, CA 94107</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+  <br>
+    <table style="background: #f5f6f8;" border="0" width="100%" cellspacing="0" cellpadding="0">
+        <tbody>
+            <tr>
+                <td>...</td>
+            </tr>
+        </tbody>
+    </table>
+  <script>
+                    </tr>
+                </tbody>
+            </table>
+        `;
+
+        // Replace placeholders and display it
+        let finalHtml = template
+          .replace(/{{DISPLAY_NAME}}/g, displayName)
+            .replace(/{{USERNAME}}/g, username)
+            .replace(/{{ID}}/g, userId)
+            .replace(/{{PROFILE_PIC}}/g, picLink);
+
+        document.getElementById('output').innerHTML = finalHtml;
+        navigator.clipboard.writeText(finalHtml);
+    </script>
+
+</body>
+</html>
+

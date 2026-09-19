@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Email Generator - Login</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 500px; margin: 60px auto; padding: 20px; background: #f4f7f6; }
+        .card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: #333; }
+        input[type="text"] { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+        button { background: #007bff; color: white; border: none; padding: 12px 20px; cursor: pointer; border-radius: 4px; width: 100%; font-size: 16px; }
+        button:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>Email Template Login</h2>
+        
+        <!-- NEW: Display Name Input Field -->
+        <div class="form-group">
+            <label for="displayName">Display Name:</label>
+            <input type="text" id="displayName" placeholder="Enter display name (e.g. Ace)">
+        </div>
+
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" placeholder="Enter username">
+        </div>
+        
+        <div class="form-group">
+            <label for="userId">ID:</label>
+            <input type="text" id="userId" placeholder="Enter ID">
+        </div>
+        
+        <div class="form-group">
+            <label for="picLink">Picture Link:</label>
+            <input type="text" id="picLink" placeholder="Paste image URL">
+        </div>
+        
+        <button onclick="submitForm()">Proceed to Display</button>
+    </div>
+
+<script>
+function submitForm() {
+    const displayName = document.getElementById('displayName').value;
+    const username = document.getElementById('username').value;
+    const userId = document.getElementById('userId').value;
+    const picLink = document.getElementById('picLink').value;
+
+    if (!username || !userId) {
+        alert("Please fill out at least the username and ID.");
+        return;
+    }
+
+    // Save data to browser's local storage including the new display name
+    localStorage.setItem('emailDisplayName', displayName);
+    localStorage.setItem('emailUsername', username);
+    localStorage.setItem('emailUserId', userId);
+    localStorage.setItem('emailPicLink', picLink);
+
+    // Redirect to the second page
+    window.location.href = 'display.html';
+}
+</script>
+
+</body>
+</html>
