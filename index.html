@@ -49,21 +49,22 @@
 <script>
     let baseTemplate = `
         <!-- SINGLE CONTINUOUS FULL-WIDTH GMAIL READING PANE -->
-        <table style="width: 100%; background: #ffffff; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); padding: 24px; font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;" border="0" cellspacing="0" cellpadding="0">
+        <table style="width: 100%; background: #ffffff; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); padding: 20px 20px 12px 20px; font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;" border="0" cellspacing="0" cellpadding="0">
             <tbody>
                 <!-- GMAIL SUBJECT & TOP RIGHT ICONS -->
                 <tr>
-                    <td style="padding-bottom: 20px;">
+                    <td style="padding-bottom: 8px;">
                         <table border="0" cellspacing="0" cellpadding="0" style="width: 100%;">
                             <tbody>
                                 <tr>
                                     <td style="vertical-align: middle;">
-                                        <span style="font-size: 22px; color: #202124; font-weight: 400; line-height: 28px; vertical-align: middle;">Account Cool - Request # 23871020</span>
+                                        <span style="font-size: 22px; color: #202124; font-weight: 400; line-height: 28px; vertical-align: middle;">Account Compromised - Request # 23871020</span>
                                         <span style="background-color: #f1f3f4; color: #3c4043; font-size: 11px; padding: 2px 6px; border-radius: 4px; font-weight: 500; margin-left: 8px; vertical-align: middle; display: inline-block; border: 1px solid #dadce0;">Inbox ×</span>
                                     </td>
                                     <td style="text-align: right; vertical-align: middle; white-space: nowrap; color: #5f6368; font-size: 18px;">
-                                        <span style="margin-left: 16px; cursor: pointer;" title="Print">🖨️</span>
-                                        <span style="margin-left: 16px; cursor: pointer;" title="Pop out">⤢</span>
+                                        <span style="margin-left: 14px; cursor: pointer;" title="Collapse/Expand">↕</span>
+                                        <span style="margin-left: 14px; cursor: pointer;" title="Print">🖨️</span>
+                                        <span style="margin-left: 14px; cursor: pointer;" title="Pop out">⤢</span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -72,18 +73,19 @@
                 </tr>
                 <!-- GMAIL SENDER INFO & BOTTOM RIGHT ICONS -->
                 <tr>
-                    <td style="padding-bottom: 24px; border-bottom: 1px solid #f1f3f4;">
+                    <td style="padding-bottom: 12px; border-bottom: 1px solid #f1f3f4;">
                         <table border="0" cellspacing="0" cellpadding="0" style="width: 100%;">
                             <tbody>
                                 <tr>
-                                    <td style="width: 40px; vertical-align: top;">
-                                        <div style="width: 40px; height: 40px; background: #5865F2; border-radius: 50%; text-align: center; line-height: 42px;">
-                                            <svg width="24" height="18" viewBox="0 0 127.14 96.36" style="vertical-align: middle;"><path fill="#ffffff" d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.79,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.81,11.1,105.25,105.25,0,0,0,32.22-16.15c2.62-27.28-4.48-51.2-19.53-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5.18-12.72,11.45-12.72S53.9,46,53.88,53,48.71,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5.18-12.72,11.45-12.72S96.15,46,96.13,53,91,65.69,84.69,65.69Z"/></svg>
+                                    <td style="width: 36px; vertical-align: top;">
+                                        <div style="width: 36px; height: 36px; background: #5865F2; border-radius: 50%; text-align: center; line-height: 38px;">
+                                            <svg width="20" height="15" viewBox="0 0 127.14 96.36" style="vertical-align: middle;"><path fill="#ffffff" d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.79,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.81,11.1,105.25,105.25,0,0,0,32.22-16.15c2.62-27.28-4.48-51.2-19.53-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5.18-12.72,11.45-12.72S53.9,46,53.88,53,48.71,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5.18-12.72,11.45-12.72S96.15,46,96.13,53,91,65.69,84.69,65.69Z"/></svg>
                                         </div>
                                     </td>
-                                    <td style="padding-left: 12px; vertical-align: middle;">
-                                        <span style="font-size: 14px; color: #202124; font-weight: bold;">Discord</span><br>
-                                        <span style="font-size: 12px; color: #5f6368;">to me <span style="font-size: 10px;">▼</span></span>
+                                    <td style="padding-left: 10px; vertical-align: middle;">
+                                        <span style="font-size: 13.5px; color: #202124; font-weight: bold;">Discord</span>
+                                        <span style="font-size: 11.5px; color: #5f6368; margin-left: 4px;">to me</span>
+                                        <span style="font-size: 9px; color: #5f6368;">▼</span>
                                     </td>
                                     <td style="text-align: right; vertical-align: middle; white-space: nowrap; color: #5f6368; font-size: 18px;">
                                         <span style="margin-left: 16px; cursor: pointer;" title="Add star">☆</span>
@@ -98,11 +100,11 @@
                 </tr>
                 <!-- YOUR ORIGINAL EMAIL CONTENT WITH SEPARATING GREY BACKGROUND (#f5f6f8) -->
                 <tr>
-                    <td style="padding-top: 20px;">
+                    <td style="padding-top: 12px;">
                         <table style="background: #f5f6f8; width: 100%;" border="0" cellspacing="0" cellpadding="0">
                           <tbody>
                             <tr>
-                              <td align="center" style="padding: 20px 0;">
+                              <td align="center" style="padding: 15px 0;">
                                 <img style="margin-right: 0px;" src="https://share1.cloudhq-mkt3.net/4f9c2ae99e46c5.png" alt="" width="175" height="48"> 
                                 <br>
                                 <span style="font-size: 8pt;">
