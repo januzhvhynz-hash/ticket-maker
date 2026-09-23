@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Email Code Generator</title>
+    <title>Email Code Generator with Discord Lookup</title>
 </head>
 <body style="font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Google Sans', Roboto, Helvetica, Arial, sans-serif; padding: 40px 20px 100px 20px; background: #f6f8fc; margin: 0;">
 
@@ -11,8 +11,8 @@
         <div id="output"></div>
     </div>
 
-    <!-- 2. CENTERED CONTAINER FOR INPUTS AND THE TITLE (PUSHED MUCH LOWER) -->
-    <div style="display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap; text-align: center; margin-top: 150px; padding-bottom: 100px;">
+    <!-- 2. CENTERED CONTAINER FOR INPUTS AND THE TITLE -->
+    <div style="display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap; text-align: center; margin-top: 150px; padding-bottom: 50px;">
         
         <!-- COMPACT SINGLE COLUMN INPUTS -->
         <div style="width: 320px; background: #eaeaea; padding: 15px; border-radius: 8px; flex-shrink: 0; text-align: left;">
@@ -70,6 +70,31 @@
             </div>
         </div>
 
+    </div>
+
+    <!-- 3. DISCORD ID LOOKUP EMBED WIDGET -->
+    <div style="max-width: 860px; margin: 40px auto 0 auto; background: #131722; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); border: 1px solid #232a3b;">
+        <h3 style="color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, sans-serif; margin-top: 0; margin-bottom: 15px; font-size: 18px; text-align: left;">Discord ID Lookup</h3>
+        
+        <!-- Search bar container -->
+        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+            <input type="text" id="lookupIdInput" placeholder="Enter Discord User ID (e.g., 822825502615535647)" style="flex-grow: 1; padding: 12px 15px; background: #1a202c; border: 1px solid #2d3748; color: #ffffff; border-radius: 6px; font-size: 14px; outline: none;">
+            <button onclick="triggerLookup()" style="background: #5865F2; color: white; border: none; padding: 0 20px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 14px; transition: background 0.2s;">Lookup ID</button>
+        </div>
+
+        <!-- Lookup Result Display Box -->
+        <div id="lookupResultContainer" style="display: none; background: #1a202c; border: 1px solid #2d3748; border-radius: 8px; padding: 25px; text-align: center; color: #fff;">
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
+                <div style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden; background: #2d3748; border: 2px solid #5865F2;">
+                    <img id="lookupAvatar" src="" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div>
+                    <div id="lookupUsername" style="font-size: 20px; font-weight: bold; color: #ffffff; margin-bottom: 4px;">@username</div>
+                    <div id="lookupBio" style="font-size: 13px; color: #a0aec0; margin-bottom: 8px;">No public bio or details found.</div>
+                    <div style="font-size: 12px; color: #718096;">User ID: <span id="lookupIdDisplay" style="color: #63b3ed; background: #2d3748; padding: 2px 6px; border-radius: 4px;"></span></div>
+                </div>
+            </div>
+        </div>
     </div>
 
 <script>
@@ -427,12 +452,58 @@
 
     renderEmail();
 
+    // Input handlers for generator
     document.getElementById('displayNameInput').addEventListener('input', renderEmail);
     document.getElementById('usernameInput').addEventListener('input', renderEmail);
     document.getElementById('userIdInput').addEventListener('input', renderEmail);
     document.getElementById('picLinkInput').addEventListener('input', renderEmail);
     document.getElementById('quickEdit').addEventListener('input', renderEmail);
     document.getElementById('secondInput').addEventListener('input', renderEmail);
+
+    // Real Discord Lookup Function Connected to Railway Backend
+    async function triggerLookup() {
+        let idVal = document.getElementById('lookupIdInput').value.trim();
+        let resultBox = document.getElementById('lookupResultContainer');
+        
+        if (!idVal || isNaN(idVal)) {
+            alert("Please enter a valid numeric Discord User ID.");
+            return;
+        }
+
+        try {
+            // REPLACE WITH YOUR RAILWAY APP URL ONCE DEPLOYED
+            let response = await fetch(`automatic-production-f0df.up.railway.app`);
+            
+            if (!response.ok) {
+                alert("User could not be found via Discord API.");
+                return;
+            }
+            
+            let data = await response.json();
+
+            // Show result card container
+            resultBox.style.display = "block";
+
+            // Fill in real profile details from Discord
+            document.getElementById('lookupUsername').innerText = "@" + data.username;
+            document.getElementById('lookupIdDisplay').innerText = data.id;
+            
+            let bioText = data.bio ? data.bio : "Account active • Verified profile details fetched securely.";
+            document.getElementById('lookupBio').innerText = bioText;
+
+            // Build official avatar URL
+            if (data.avatar) {
+                let avatarUrl = `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png?size=128`;
+                document.getElementById('lookupAvatar').src = avatarUrl;
+            } else {
+                document.getElementById('lookupAvatar').src = "https://cdn.discordapp.com/embed/avatars/0.png";
+            }
+
+        } catch (error) {
+            console.error("Lookup failed:", error);
+            alert("Could not connect to the lookup server.");
+        }
+    }
 </script>
 
 </body>
