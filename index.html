@@ -1,68 +1,327 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Email Generator - Login</title>
-    <style>
-        body { font-family: Arial, sans-serif; max-width: 500px; margin: 60px auto; padding: 20px; background: #f4f7f6; }
-        .card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-weight: bold; color: #333; }
-        input[type="text"] { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
-        button { background: #007bff; color: white; border: none; padding: 12px 20px; cursor: pointer; border-radius: 4px; width: 100%; font-size: 16px; }
-        button:hover { background: #0056b3; }
-    </style>
+    <title>Email Code Generator</title>
 </head>
-<body>
+<body style="font-family: Arial, sans-serif; padding: 20px; background: #f6f8fc; margin: 0;">
 
-    <div class="card">
-        <h2>Email Template Login</h2>
+    <!-- 1. LIVE VISUAL PREVIEW -->
+    <div style="margin-bottom: 30px;">
+        <div id="output"></div>
+    </div>
+
+    <!-- 2. COMPACT SINGLE COLUMN INPUTS ON THE LEFT -->
+    <div style="width: 320px; background: #eaeaea; padding: 15px; border-radius: 8px;">
         
-        <!-- NEW: Display Name Input Field -->
-        <div class="form-group">
-            <label for="displayName">Display Name:</label>
-            <input type="text" id="displayName" placeholder="Enter display name (e.g. Ace)">
+        <div style="margin-bottom: 10px;">
+            <label for="displayNameInput" style="font-size: 11px; color: #444; display: block; margin-bottom: 3px; font-weight: bold;">USER DISPLAY NAME:</label>
+            <input type="text" id="displayNameInput" placeholder="Enter display name..." style="width: 100%; padding: 6px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
         </div>
 
-        <div class="form-group">
-            <label for="username">Username:</label>
-            <input type="text" id="username" placeholder="Enter username">
+        <div style="margin-bottom: 10px;">
+            <label for="usernameInput" style="font-size: 11px; color: #444; display: block; margin-bottom: 3px; font-weight: bold;">USERNAME:</label>
+            <input type="text" id="usernameInput" placeholder="Enter username..." style="width: 100%; padding: 6px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
         </div>
-        
-        <div class="form-group">
-            <label for="userId">ID:</label>
-            <input type="text" id="userId" placeholder="Enter ID">
+
+        <div style="margin-bottom: 10px;">
+            <label for="userIdInput" style="font-size: 11px; color: #444; display: block; margin-bottom: 3px; font-weight: bold;">USER ID:</label>
+            <input type="text" id="userIdInput" placeholder="Enter user ID..." style="width: 100%; padding: 6px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
         </div>
-        
-        <div class="form-group">
-            <label for="picLink">Picture Link:</label>
-            <input type="text" id="picLink" placeholder="Paste image URL">
+
+        <div style="margin-bottom: 10px;">
+            <label for="picLinkInput" style="font-size: 11px; color: #444; display: block; margin-bottom: 3px; font-weight: bold;">PICTURE LINK:</label>
+            <input type="text" id="picLinkInput" placeholder="Paste image link here..." style="width: 100%; padding: 6px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
         </div>
-        
-        <button onclick="submitForm()">Proceed to Display</button>
+
+        <div style="margin-bottom: 10px;">
+            <label for="quickEdit" style="font-size: 11px; color: #444; display: block; margin-bottom: 3px; font-weight: bold;">ADMIN USER ID:</label>
+            <input type="text" id="quickEdit" placeholder="Type here..." style="width: 100%; padding: 6px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
+
+        <div style="margin-bottom: 0;">
+            <label for="secondInput" style="font-size: 11px; color: #444; display: block; margin-bottom: 3px; font-weight: bold;">ADMIN DISCORD NAME:</label>
+            <input type="text" id="secondInput" placeholder="Edit part 2..." style="width: 100%; padding: 6px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
+
     </div>
 
 <script>
-function submitForm() {
-    const displayName = document.getElementById('displayName').value;
-    const username = document.getElementById('username').value;
-    const userId = document.getElementById('userId').value;
-    const picLink = document.getElementById('picLink').value;
+    let baseTemplate = `
+        <!-- SINGLE CONTINUOUS FULL-WIDTH GMAIL READING PANE -->
+        <table style="width: 100%; background: #ffffff; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); padding: 24px; font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;" border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+                <!-- GMAIL SUBJECT & TOP RIGHT ICONS -->
+                <tr>
+                    <td style="padding-bottom: 20px;">
+                        <table border="0" cellspacing="0" cellpadding="0" style="width: 100%;">
+                            <tbody>
+                                <tr>
+                                    <td style="vertical-align: middle;">
+                                        <span style="font-size: 22px; color: #202124; font-weight: 400; line-height: 28px; vertical-align: middle;">Account Cool - Request # 23871020</span>
+                                        <span style="background-color: #f1f3f4; color: #3c4043; font-size: 11px; padding: 2px 6px; border-radius: 4px; font-weight: 500; margin-left: 8px; vertical-align: middle; display: inline-block; border: 1px solid #dadce0;">Inbox ×</span>
+                                    </td>
+                                    <td style="text-align: right; vertical-align: middle; white-space: nowrap; color: #5f6368; font-size: 18px;">
+                                        <span style="margin-left: 16px; cursor: pointer;" title="Print">🖨️</span>
+                                        <span style="margin-left: 16px; cursor: pointer;" title="Pop out">⤢</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <!-- GMAIL SENDER INFO & BOTTOM RIGHT ICONS -->
+                <tr>
+                    <td style="padding-bottom: 24px; border-bottom: 1px solid #f1f3f4;">
+                        <table border="0" cellspacing="0" cellpadding="0" style="width: 100%;">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 40px; vertical-align: top;">
+                                        <div style="width: 40px; height: 40px; background: #5865F2; border-radius: 50%; text-align: center; line-height: 42px;">
+                                            <svg width="24" height="18" viewBox="0 0 127.14 96.36" style="vertical-align: middle;"><path fill="#ffffff" d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.79,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.81,11.1,105.25,105.25,0,0,0,32.22-16.15c2.62-27.28-4.48-51.2-19.53-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5.18-12.72,11.45-12.72S53.9,46,53.88,53,48.71,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5.18-12.72,11.45-12.72S96.15,46,96.13,53,91,65.69,84.69,65.69Z"/></svg>
+                                        </div>
+                                    </td>
+                                    <td style="padding-left: 12px; vertical-align: middle;">
+                                        <span style="font-size: 14px; color: #202124; font-weight: bold;">Discord</span><br>
+                                        <span style="font-size: 12px; color: #5f6368;">to me <span style="font-size: 10px;">▼</span></span>
+                                    </td>
+                                    <td style="text-align: right; vertical-align: middle; white-space: nowrap; color: #5f6368; font-size: 18px;">
+                                        <span style="margin-left: 16px; cursor: pointer;" title="Add star">☆</span>
+                                        <span style="margin-left: 16px; cursor: pointer;" title="Add emoji">☺</span>
+                                        <span style="margin-left: 16px; cursor: pointer;" title="Reply">↩</span>
+                                        <span style="margin-left: 16px; cursor: pointer;" title="More">⋮</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <!-- YOUR ORIGINAL EMAIL CONTENT WITH SEPARATING GREY BACKGROUND (#f5f6f8) -->
+                <tr>
+                    <td style="padding-top: 20px;">
+                        <table style="background: #f5f6f8; width: 100%;" border="0" cellspacing="0" cellpadding="0">
+                          <tbody>
+                            <tr>
+                              <td align="center" style="padding: 20px 0;">
+                                <img style="margin-right: 0px;" src="https://share1.cloudhq-mkt3.net/4f9c2ae99e46c5.png" alt="" width="175" height="48"> 
+                                <br>
+                                <span style="font-size: 8pt;">
+                                  <strong>Service Notification</strong>
+                                </span>
+                                <table style="width: 600px; max-width: 100%; margin-top: 18px; background: #ffffff; border: 1px solid #e0e3e7; border-radius: 11px; overflow: hidden; height: 704px;" border="0" width="600" cellspacing="0" cellpadding="0">
+                                  <tbody>
+                                    <tr style="height: 59px;">
+                                      <td style="background: #fff0f0; border-bottom: 1px solid #ffd6d6; padding: 13px 16px 14px; height: 59px; width: 566.222px;">
+                                        <div style="font-size: 13px; font-weight: bold; margin-bottom: 7px;">
+                                          <strong style="color: #990000;">
+                                            <span style="font-family: tahoma, sans-serif;">PENDING REPORT — Fraudulent</span>
+                                          </strong>
+                                        </div>
+                                        <div style="font-size: 11.5px; line-height: 18px;">
+                                          <span style="color: #666666; font-size: x-small;">An active enforcement case is associated with this account, and compliance verification is currently pending.&nbsp;Inform reported User and advise them to submit an appeal. Due to the report category selected, they will not receive an automatic notification.</span>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                    <tr style="height: 609px;">
+                                      <td style="padding: 16px; height: 609px; width: 566.222px;">
+                                        <input name="cloudhq_backup_comment_node" type="hidden" value="%20ACCOUNT%20DETAILS%20CARD%20">
+                                        <table style="background: #f8f9fa; border: 1px solid #dfe3e7; border-radius: 9px;" border="0" width="100%" cellspacing="0" cellpadding="0">
+                                          <tbody>
+                                            <tr>
+                                              <td style="padding: 14px;">​ ​
+                                                <table style="width: 100%; height: 113px;" border="0" width="100%" cellspacing="0" cellpadding="0">
+                                                  <tbody>
+                                                    <tr style="height: 113px;">
+                                                      <td style="width: 58.2868%; height: 113px;" valign="top">
+                                                        <div style="color: #617087; font-size: 11px; font-weight: bold; letter-spacing: .6px; margin-bottom: 9px;">ACCOUNT DETAILS</div>
+                                                        <div style="color: #071b30; margin-bottom: 9px;">
+                            <strong>
+                                <span style="font-size: large;">{{DISPLAY_NAME}}</span>
+                            </strong>
+                        </div>
+                        <div style="font-size: 12px; line-height: 20px;">
+                            <strong style="color: #0b2948;">Username:</strong>&nbsp; 
+                            <strong>
+                                <span style="color: #38761d;">&nbsp; &nbsp;&nbsp; 
+                                    <span style="font-size: small;">{{USERNAME}}</span>
+                                </span>
+                            </strong>
+                        </div>
+                        <div style="font-size: 12px; line-height: 20px;">
+                            <strong style="color: #0b2948;">User ID:&nbsp;</strong>&nbsp; &nbsp; &nbsp; &nbsp; 
+                            <span style="color: #38761d;">&nbsp; 
+                                <span style="font-size: small;">
+                                    <strong>{{ID}}</strong>
+                                </span>
+                            </span>
+                        </div>
+                        <div style="color: #5b6d83; font-size: 12px; line-height: 20px; margin-top: 3px;">
+                            <strong>
+                                <span style="color: #800000;">Status:</span>
+                            </strong>&nbsp;
+                            <span style="color: #808080; font-family: arial, sans-serif; font-size: 13px; background-color: #f9fafb;">&nbsp; &nbsp; Pending Compliance Verification.</span>
+                        </div>
+                                                      </td>
+                                                      <td style="width: 41.7132%; height: 113px;" align="right" valign="top">
+                                                        <span style="display: inline-block; background: #fff1f1; color: #b42323; border: 1px solid #ffcccc; border-radius: 0px; padding: 5px 13px; font-size: 10px; white-space: nowrap;">
+                                                          <img style="margin-right: 0px;" src="{{PROFILE_PIC}}" alt="image.png" width="81" height="81" data-surl="cid:ii_mtyl3r2c0">​ 
+                                                          <br>
+                                                          <span style="font-family: verdana, sans-serif;">
+                                                            <strong>ALLEGED USER</strong>
+                                                          </span>
+                                                        </span>
+                                                      </td>
+                                                    </tr>
+                                                  </tbody>
+                                                </table>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                        <input name="cloudhq_backup_comment_node" type="hidden" value="%20SECTION%20TITLE%20">
+                                        <div style="color: #071b30; font-size: 14px; font-weight: bold; margin-top: 18px; margin-bottom: 6px;">The user involved must</div>
+                                        <div style="color: #36516e; font-size: 11.5px; line-height: 18px; margin-bottom: 7px;">The enforcement window will close in approximately&nbsp; 
+                                            <strong>24 hours</strong>.
+                                        </div>
+                                        <input name="cloudhq_backup_comment_node" type="hidden" value="%20NUMBERED%20STEPS%20">
+                                        <table style="font-size: 11.5px; color: #173b60; line-height: 18px;" border="0" width="100%" cellspacing="0" cellpadding="0">
+                                          <tbody>
+                                            <tr>
+                                              <td style="padding: 2px 7px 3px 0;" valign="top">1.</td>
+                                              <td style="padding: 2px 0 3px 0;">Add the assigned Discord Support through the provided tag to proceed with the verification process.</td>
+                                            </tr>
+                                            <tr>
+                                              <td style="padding: 2px 7px 3px 0;" valign="top">2.</td>
+                                              <td style="padding: 2px 0 3px 0;">Once you have sent the friend request to support, please send a message and provide the relevant case details.</td>
+                                            </tr>
+                                            <tr>
+                                              <td style="padding: 2px 7px 3px 0;" valign="top">3.</td>
+                                              <td style="padding: 2px 0 3px 0;">Contact official support and complete the required verification before the enforcement window ends to avoid further action.</td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                        <table style="margin-top: 16px; background: #fff1f1; border: 1px solid #ffcccc; border-radius: 8px;" border="0" width="100%" cellspacing="0" cellpadding="0">
+                                          <tbody>
+                                            <tr>
+                                              <td style="padding: 12px 13px;">
+                                                <div style="font-size: 13px; font-weight: bold; margin-bottom: 7px;">
+                                                  <strong>
+                                                    <span style="font-family: arial, sans-serif; background-color: #fff1f2;">
+                                                      <span style="color: #990000;">Action Required — Discord Contact Missing</span>
+                                                    </span>
+                                                  </strong>
+                                                </div>
+                                                <div style="font-size: 11px; line-height: 17px;">
+                                                  <span style="color: #666666;">Validation cannot proceed until the assigned Discord Support has been added. Failure to establish contact may result in escalation and automatic enforcement.</span>
+                                                </div>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                        <input name="cloudhq_backup_comment_node" type="hidden" value="%20ASSIGNED%20CONTACT%20CARD%20">
+                                        <table style="margin-top: 17px; background: #f8f9fa; border: 1px solid #dfe3e7; border-radius: 9px;" border="0" width="100%" cellspacing="0" cellpadding="0">
+                                          <tbody>
+                                            <tr>
+                                              <td style="padding: 14px;">
+                                                <div style="color: #617087; font-size: 11px; letter-spacing: 0.6px; margin-bottom: 9px;">
+                                                  <span style="font-family: tahoma, sans-serif;">ASSIGNED CONTACT SUPPORT INFO</span>
+                                                </div>
+                                                <div style="margin-bottom: 5px;">
+                                                  <div style="margin-bottom: 5px;">
+                                                    <span style="color: #666666;">User ID:</span>&nbsp; 
+                                                    <strong>
+                                                      <span style="font-size: large; color: #3d61cc;">{{QUICK_EDIT_TEXT}}</span>
+                                                    </strong>
+                                                  </div>
+                                                  <div style="color: #3d61cc; font-size: 11px; margin-bottom: 10px;">
+                                                    <span style="color: #6b7280; font-family: arial, sans-serif; font-size: 12px; background-color: #f9fafb;">Official Discord Safety Analyst™</span>
+                                                  </div>
+                                                  <div style="font-size: 12px; line-height: 19px;">
+                                                    <strong style="color: #173b60;">
+                                                      <span style="font-size: 13px; color: #374151; background-color: #f9fafb; font-family: arial, sans-serif;">Discord Name</span>&nbsp; 
+                                                      <span style="color: #222222; font-size: small;">&nbsp;</span>:&nbsp;
+                                                    </strong>&nbsp;
+                                                    <strong>&nbsp;</strong>&nbsp; &nbsp;&nbsp;
+                                                    <strong>
+                                                      <span style="color: #38761d;">{{SECOND_TEXT}}</span>
+                                                    </strong>&nbsp;
+                                                    <strong>
+                                                      <span style="color: #0b5394;">&nbsp; 
+                                                        <span style="font-size: small;">&nbsp;</span>
+                                                      </span>
+                                                    </strong>
+                                                  </div>
+                                                </div>
+                                                <input name="cloudhq_backup_comment_node" type="hidden" value="%20BLUE%20BUTTON%20">&nbsp;
+                                                <span style="font-size: 8pt;">
+                                                  <a href="https://discord.com/channels/@me/1456297213033447661" target="_blank" class="cloudHQ__gmail_elements_final_btn" style="background-color: #3d61cc; color: #ffffff; border: 0px solid #000000; border-radius: 3px; box-sizing: border-box; font-weight: bold; line-height: 40px; padding: 12px 24px; text-align: center; text-decoration: none; text-transform: uppercase; vertical-align: middle;" rel="noopener">Contact Support</a>
+                                                </span>&nbsp;
+                                                <br>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </td>
+                                    </tr>
+                                    <tr style="height: 36px;">
+                                      <td style="border-top: 1px solid #e0e3e7; padding: 17px 18px 15px; height: 36px; width: 562.222px;">
+                                        <div style="color: #63758a; font-size: 9.5px; line-height: 15px; margin-bottom: 10px; text-align: center;">
+                                          <strong style="color: #666666; font-family: Arial, sans-serif; font-size: 10.6667px; text-align: center;">Account Safety &amp; Review Department&nbsp;</strong>
+                                        </div>
+                                        <div style="line-height: 15px; margin-bottom: 10px; text-align: center;">
+                                          <span style="color: #6b7280; font-size: 11px; font-family: arial, sans-serif;">Failure to submit valid proof may result in full suspension within 24 hours of this ticket being filed. This action may proceed automatically if no response is received.</span>&nbsp;
+                                          <span style="color: #63758a; font-size: xx-small;">More information:</span>&nbsp;
+                                          <a href="https://support.discord.com/hc/en-us/articles/4420312247575-Additional-Terms-and-Policies" style="color: #4c5ff1; font-size: 9.5px; text-decoration: none; font-weight: bold;">Terms of Service</a>&nbsp;
+                                          <span style="color: #63758a; font-size: xx-small;">·</span>&nbsp;
+                                          <a href="https://support.discord.com/hc/en-us/articles/4420312247575-Additional-Terms-and-Policies" style="color: #4c5ff1; font-size: 9.5px; text-decoration: none; font-weight: bold;">Privacy Policy</a>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <br>
+                                <span style="color: #666666; font-family: Arial, sans-serif; background-color: #f1f2f3; font-size: 8pt;">Sent by Discord • Check Our Blog •&nbsp; 
+                                  <a href="https://discord.com/" target="_blank" style="color: #5865f2; text-decoration: none;" rel="noopener">@discord</a>
+                                </span>&nbsp;
+                                <br style="color: #666666; font-family: Arial, sans-serif; font-size: 11px; background-color: #f1f2f3;">
+                                <span style="color: #666666; font-family: Arial, sans-serif; background-color: #f1f2f3; font-size: 8pt;">444 De Haro Street, Suite 200, San Francisco, CA 94107</span>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+`;
 
-    if (!username || !userId) {
-        alert("Please fill out at least the username and ID.");
-        return;
+    function renderEmail() {
+        let displayName = document.getElementById('displayNameInput').value || "";
+        let username = document.getElementById('usernameInput').value || "";
+        let userId = document.getElementById('userIdInput').value || "";
+        let picUrl = document.getElementById('picLinkInput').value || "";
+        let customText = document.getElementById('quickEdit').value || "";
+        let secondText = document.getElementById('secondInput').value || "";
+
+        let finalHtml = baseTemplate
+            .replace(/{{DISPLAY_NAME}}/g, displayName)
+            .replace(/{{USERNAME}}/g, username)
+            .replace(/{{ID}}/g, userId)
+            .replace(/{{PROFILE_PIC}}/g, picUrl)
+            .replace(/{{QUICK_EDIT_TEXT}}/g, customText)
+            .replace(/{{SECOND_TEXT}}/g, secondText);
+
+        document.getElementById('output').innerHTML = finalHtml;
     }
 
-    // Save data to browser's local storage including the new display name
-    localStorage.setItem('emailDisplayName', displayName);
-    localStorage.setItem('emailUsername', username);
-    localStorage.setItem('emailUserId', userId);
-    localStorage.setItem('emailPicLink', picLink);
+    renderEmail();
 
-    // Redirect to the second page
-    window.location.href = 'display.html';
-}
+    document.getElementById('displayNameInput').addEventListener('input', renderEmail);
+    document.getElementById('usernameInput').addEventListener('input', renderEmail);
+    document.getElementById('userIdInput').addEventListener('input', renderEmail);
+    document.getElementById('picLinkInput').addEventListener('input', renderEmail);
+    document.getElementById('quickEdit').addEventListener('input', renderEmail);
+    document.getElementById('secondInput').addEventListener('input', renderEmail);
 </script>
 
 </body>
