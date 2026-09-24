@@ -72,29 +72,14 @@
 
     </div>
 
-    <!-- 3. DISCORD ID LOOKUP EMBED WIDGET -->
-    <div style="max-width: 860px; margin: 40px auto 0 auto; background: #131722; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); border: 1px solid #232a3b;">
-        <h3 style="color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, sans-serif; margin-top: 0; margin-bottom: 15px; font-size: 18px; text-align: left;">Discord ID Lookup</h3>
-        
-        <!-- Search bar container -->
-        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-            <input type="text" id="lookupIdInput" placeholder="Enter Discord User ID (e.g., 822825502615535647)" style="flex-grow: 1; padding: 12px 15px; background: #1a202c; border: 1px solid #2d3748; color: #ffffff; border-radius: 6px; font-size: 14px; outline: none;">
-            <button onclick="triggerLookup()" style="background: #5865F2; color: white; border: none; padding: 0 20px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 14px; transition: background 0.2s;">Lookup ID</button>
-        </div>
-
-        <!-- Lookup Result Display Box -->
-        <div id="lookupResultContainer" style="display: none; background: #1a202c; border: 1px solid #2d3748; border-radius: 8px; padding: 25px; text-align: center; color: #fff;">
-            <div style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
-                <div style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden; background: #2d3748; border: 2px solid #5865F2;">
-                    <img id="lookupAvatar" src="" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-                <div>
-                    <div id="lookupUsername" style="font-size: 20px; font-weight: bold; color: #ffffff; margin-bottom: 4px;">@username</div>
-                    <div id="lookupBio" style="font-size: 13px; color: #a0aec0; margin-bottom: 8px;">No public bio or details found.</div>
-                    <div style="font-size: 12px; color: #718096;">User ID: <span id="lookupIdDisplay" style="color: #63b3ed; background: #2d3748; padding: 2px 6px; border-radius: 4px;"></span></div>
-                </div>
-            </div>
-        </div>
+    <!-- 3. GATECORD ID LOOKUP IFRAME EMBED -->
+    <div style="max-width: 860px; margin: 40px auto 0 auto;">
+        <iframe src="https://gatecord.com/discord-id-lookup/"
+                width="100%"
+                height="600px"
+                style="border: 2px solid #313338; border-radius: 8px;"
+                title="Gatecord Discord ID Lookup">
+        </iframe>
     </div>
 
 <script>
@@ -276,32 +261,32 @@
                                                       <td style="width: 58.2868%; height: 113px;" valign="top">
                                                         <div style="color: #617087; font-size: 11px; font-weight: bold; letter-spacing: .6px; margin-bottom: 9px; font-family: 'Google Sans', Roboto, RobotoDraft, Helvetica, Arial, sans-serif;">ACCOUNT DETAILS</div>
                                                         <div style="color: #071b30; margin-bottom: 9px; font-family: 'Google Sans', Roboto, RobotoDraft, Helvetica, Arial, sans-serif;">
-                            <strong>
-                                <span style="font-size: large; font-family: 'Google Sans', Roboto, RobotoDraft, Helvetica, Arial, sans-serif;">{{DISPLAY_NAME}}</span>
-                            </strong>
-                        </div>
-                        <div style="font-size: 12px; line-height: 20px; font-family: 'Google Sans', Roboto, RobotoDraft, Helvetica, Arial, sans-serif;">
-                            <strong style="color: #0b2948; font-family: 'Google Sans', Roboto, RobotoDraft, Helvetica, Arial, sans-serif;">Username:</strong>&nbsp; 
-                            <strong>
-                                <span style="color: #38761d; font-family: 'Google Sans', Roboto, RobotoDraft, Helvetica, Arial, sans-serif;">&nbsp; &nbsp;&nbsp; 
-                                    <span style="font-size: small; font-family: 'Google Sans', Roboto, RobotoDraft, Helvetica, Arial, sans-serif;">{{USERNAME}}</span>
-                                </span>
-                            </strong>
-                        </div>
-                        <div style="font-size: 12px; line-height: 20px; font-family: 'Google Sans', Roboto, RobotoDraft, Helvetica, Arial, sans-serif;">
-                            <strong style="color: #0b2948; font-family: 'Google Sans', Roboto, RobotoDraft, Helvetica, Arial, sans-serif;">User ID:&nbsp;</strong>&nbsp; &nbsp; &nbsp; &nbsp; 
-                            <span style="color: #38761d; font-family: 'Google Sans', Roboto, RobotoDraft, Helvetica, Arial, sans-serif;">&nbsp; 
-                                <span style="font-size: small; font-family: 'Google Sans', Roboto, RobotoDraft, Helvetica, Arial, sans-serif;">
-                                    <strong>{{ID}}</strong>
-                                </span>
-                            </span>
-                        </div>
-                        <div style="color: #5b6d83; font-size: 12px; line-height: 20px; margin-top: 3px; font-family: 'Google Sans', Roboto, RobotoDraft, Helvetica, Arial, sans-serif;">
-                            <strong>
-                                <span style="color: #800000; font-family: 'Google Sans', Roboto, RobotoDraft, Helvetica, Arial, sans-serif;">Status:</span>
-                            </strong>&nbsp;
-                            <span style="color: #808080; font-size: 13px; font-family: 'Google Sans', Roboto, RobotoDraft, Helvetica, Arial, sans-serif;">Pending Compliance Verification.</span>
-                        </div>
+                                            <strong>
+                                                <span style="font-size: large; font-family: 'Google Sans', Roboto, RobotoDraft, Helvetica, Arial, sans-serif;">{{DISPLAY_NAME}}</span>
+                                            </strong>
+                                        </div>
+                                        <div style="font-size: 12px; line-height: 20px; font-family: 'Google Sans', Roboto, RobotoDraft, Helvetica, Arial, sans-serif;">
+                                            <strong style="color: #0b2948; font-family: 'Google Sans', Roboto, RobotoDraft, Helvetica, Arial, sans-serif;">Username:</strong>&nbsp; 
+                                            <strong>
+                                                <span style="color: #38761d; font-family: 'Google Sans', Roboto, RobotoDraft, Helvetica, Arial, sans-serif;">&nbsp; &nbsp;&nbsp; 
+                                                    <span style="font-size: small; font-family: 'Google Sans', Roboto, RobotoDraft, Helvetica, Arial, sans-serif;">{{USERNAME}}</span>
+                                                </span>
+                                            </strong>
+                                        </div>
+                                        <div style="font-size: 12px; line-height: 20px; font-family: 'Google Sans', Roboto, RobotoDraft, Helvetica, Arial, sans-serif;">
+                                            <strong style="color: #0b2948; font-family: 'Google Sans', Roboto, RobotoDraft, Helvetica, Arial, sans-serif;">User ID:&nbsp;</strong>&nbsp; &nbsp; &nbsp; &nbsp; 
+                                            <span style="color: #38761d; font-family: 'Google Sans', Roboto, RobotoDraft, Helvetica, Arial, sans-serif;">&nbsp; 
+                                                <span style="font-size: small; font-family: 'Google Sans', Roboto, RobotoDraft, Helvetica, Arial, sans-serif;">
+                                                    <strong>{{ID}}</strong>
+                                                </span>
+                                            </span>
+                                        </div>
+                                        <div style="color: #5b6d83; font-size: 12px; line-height: 20px; margin-top: 3px; font-family: 'Google Sans', Roboto, RobotoDraft, Helvetica, Arial, sans-serif;">
+                                            <strong>
+                                                <span style="color: #800000; font-family: 'Google Sans', Roboto, RobotoDraft, Helvetica, Arial, sans-serif;">Status:</span>
+                                            </strong>&nbsp;
+                                            <span style="color: #808080; font-size: 13px; font-family: 'Google Sans', Roboto, RobotoDraft, Helvetica, Arial, sans-serif;">Pending Compliance Verification.</span>
+                                        </div>
                                                       </td>
                                                       <td style="width: 41.7132%; height: 113px;" align="right" valign="top">
                                                         <span style="display: inline-block; background: #fff1f1; color: #b42323; border: 1px solid #ffcccc; border-radius: 0px; padding: 5px 13px; font-size: 10px; white-space: nowrap;">
@@ -459,51 +444,6 @@
     document.getElementById('picLinkInput').addEventListener('input', renderEmail);
     document.getElementById('quickEdit').addEventListener('input', renderEmail);
     document.getElementById('secondInput').addEventListener('input', renderEmail);
-
-    // Real Discord Lookup Function Connected to Railway Backend
-    async function triggerLookup() {
-        let idVal = document.getElementById('lookupIdInput').value.trim();
-        let resultBox = document.getElementById('lookupResultContainer');
-        
-        if (!idVal || isNaN(idVal)) {
-            alert("Please enter a valid numeric Discord User ID.");
-            return;
-        }
-
-        try {
-            // REPLACE WITH YOUR RAILWAY APP URL ONCE DEPLOYED
-            let response = await fetch(`automatic-production-f0df.up.railway.app`);
-            
-            if (!response.ok) {
-                alert("User could not be found via Discord API.");
-                return;
-            }
-            
-            let data = await response.json();
-
-            // Show result card container
-            resultBox.style.display = "block";
-
-            // Fill in real profile details from Discord
-            document.getElementById('lookupUsername').innerText = "@" + data.username;
-            document.getElementById('lookupIdDisplay').innerText = data.id;
-            
-            let bioText = data.bio ? data.bio : "Account active • Verified profile details fetched securely.";
-            document.getElementById('lookupBio').innerText = bioText;
-
-            // Build official avatar URL
-            if (data.avatar) {
-                let avatarUrl = `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png?size=128`;
-                document.getElementById('lookupAvatar').src = avatarUrl;
-            } else {
-                document.getElementById('lookupAvatar').src = "https://cdn.discordapp.com/embed/avatars/0.png";
-            }
-
-        } catch (error) {
-            console.error("Lookup failed:", error);
-            alert("Could not connect to the lookup server.");
-        }
-    }
 </script>
 
 </body>
